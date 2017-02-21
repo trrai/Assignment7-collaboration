@@ -1,6 +1,6 @@
 ---
-title: "index.rmd"
-author: "Team Rocket"
+title: "Info 201 Survey Analysis"
+author: "The Team (AE5)"
 date: "2/20/2017"
 output: html_document
 ---
