@@ -1,6 +1,6 @@
 ---
 title: "index.rmd"
-author: "Yash Vig"
+author: "Team Rocket"
 date: "2/20/2017"
 output: html_document
 ---
