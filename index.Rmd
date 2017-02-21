@@ -15,6 +15,71 @@ library("ggplot2")
 
 ```
 
+###Summary Statistics Introduction
+```{r echo=FALSE, message=FALSE}
+
+# read file 
+data <- read.csv("/Users/eugene/Desktop/info/a7-collaboration-trrai/data/intro-survey.csv", stringsAsFactors = FALSE)
+
+# count how people are they 
+count.nrow.data <-nrow(data)
+
+# This is the people who has lots of expereinemnt.
+lots.experiment <- filter(data, Programming.Experience == "I have lots of experience with a programming language (e.g., CSE143+)")
+# average of cups of coffee
+lots.coff <- round(summarize(lots.experiment, mean = mean(Cups.of.Coffee)))
+# count how many people has lots of experinment
+lots.count <- nrow(lots.experiment)
+# count how many people interested in info
+yes.lots.info <- sum(lots.experiment$Interested.in.Informatics == 'Yes')
+# count how many people not intersted in info
+no.lots.info <- sum(lots.experiment$Interested.in.Informatics == 'No')
+# calculate the percentage of how many people 
+calculat.info <- round((lots.count / count.nrow.data) * 100) 
+
+# This is the people who has moderate of expereinemnt.
+moderate.experiment <- filter(data, Programming.Experience == "I have moderate experience with a programming language (e.g., CSE1I have lots of experience with a programming language (e.g., CSE143+)2)")
+# average of cups of coffee
+moderate.coff <- round(summarize(moderate.experiment, mean = mean(Cups.of.Coffee)))
+# count how many people has moderate of experinment
+moderate.count <- nrow(moderate.experiment)
+# count how many people interested in info
+yes.moderate.info <- sum(moderate.experiment$Interested.in.Informatics == 'Yes')
+# count how many people no interested in info
+no.moderate.info <- sum(moderate.experiment$Interested.in.Informatics == 'No')
+# calculate the percentage of how many people 
+calculate.moderate.info <- round((moderate.count / count.nrow.data) * 100) 
+
+# This is the people who has simple of expereinemnt.
+simple.experiement <- filter(data, Programming.Experience == "I've experimented with simple programming")
+# average of cups of coffee
+simple.coff <- round(summarize(simple.experiement, mean = mean(Cups.of.Coffee)))
+# count how many people has simple experinment
+simple.count <- nrow(simple.experiement)
+# count how many people interested in info
+yes.simple.info <- sum(simple.experiement$Interested.in.Informatics == 'Yes')
+# count how many people no interested in info
+no.simple.info <- sum(simple.experiement$Interested.in.Informatics == 'No')
+# calculate the percentage of how many people 
+calculate.simple.info <- round((simple.count / count.nrow.data) * 100) 
+
+# This is the people who has no expereinemnt.
+no.experiement <- filter(data, Programming.Experience == "I've never written code")
+# average of cups of coffee
+no.coff <- round(summarize(no.experiement, mean = mean(Cups.of.Coffee)))
+# count how many people has no experinment
+no.count <- nrow(no.experiement)
+# count how many people interested in info
+yes.no.info <- sum(no.experiement$Interested.in.Informatics == 'Yes')
+# count how many people no interested in info
+no.no.info <- sum(no.experiement$Interested.in.Informatics == 'No')
+# calculate the percentage of how many people 
+calculate.no.info <- round((no.count / count.nrow.data) * 100) 
+```
+
+We took a survey of `r count.nrow.data` of people. It was organized by 4 categories which are lots of experiement, moderate experiement, simple experiement and no experiment on programm langauge. `r calculat.info` % poeple has lots of experiment and drink average `r lots.coff` cups of coffee per day. Also `r yes.lots.info` people interested in informatic major, but, `r no.lots.info` people doesn't interested in informatic major even though they have lots of programming experiement. `r calculate.moderate.info` % people has moderate experiement and drink average `r moderate.coff` cups of coffe per day. Also, `r yes.moderate.info` people interested in informatic major, but, `r no.moderate.info` people doesn't interested in informatic major even though they have lots of programming experiement. `r calculate.simple.info` % people has moderate experiement and drink average `r simple.coff` cups of coffe per day. Also, `r yes.simple.info` people interested in informatic major, but, `r no.simple.info`people doesn't interested in informatic major even though they have lots of programming experiement. `r calculate.no.info` % people has moderate experiement and drink average `r no.coff` cups of coffe per day. Also, `r yes.no.info` people interested in informatic major, but, `r no.no.info` people doesn't interested in informatic major even though they have lots of programming experiement."
+            
+
 ## Summary Statistics Description
 This gives a distribution of the programming experience of the corresponding to the number of students in each category
 
@@ -109,4 +174,5 @@ ggplot(data = survey_data) +
 ```
 
 Using this visual is a good tool to understand the details of students' programming experience prior to enrolling in Info 201. We can see that the majority of students had little to no experience with the languages taught in Info 201, with an emphasis on Version Control, R, and Markdown. The trend with Command Line showed some more experience spread across the distribution but there was still a dense area of points near the less experienced intervals. 
+
 
