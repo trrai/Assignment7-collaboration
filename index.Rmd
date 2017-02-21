@@ -80,7 +80,7 @@ calculate.no.info <- round((no.count / count.nrow.data) * 100)
 The Info 201 survey was given at the beginning of the quarter and asked students about various topics, including previous coding experience, coffee intake, Seahawks preference and more. A total of `r count.nrow.data` students took the survey. Programming experience was measured in four intervals: lots of experience, moderate experience, simple experience and no experience in programming languages. Coffee consumption was measured in cups per day. `r calculat.info`% of students have lots of experience and drink an average of `r lots.coff` cups of coffee per day. Also `r yes.lots.info` people are interested in the Informatics major, but `r no.lots.info` people are not interested in the Informatics major even though they have lots of programming experience. `r calculate.moderate.info`% of students have moderate experience and drink an average of `r moderate.coff` cups of coffee per day. In addition, `r yes.moderate.info` people are interested in Informatics while `r no.moderate.info` people aren't interested in studying Informatics even though they have moderate programming experience. `r calculate.simple.info`% people have experimented with simple programming and drink an average of `r simple.coff` cups of coffee per day; `r yes.simple.info`% of that group is interested in Informatics. Moving on, `r calculate.no.info`% people have no prior experience with coding and drink an average of `r no.coff` cups of coffee per day. As a whole, `r yes.no.info` people are interested in Informatics major and `r no.no.info` students indicated they were not interested. We can confidently say there are patterns present within the data collected, including relationships between various types of programming experience and coffee consumption. 
 
 ###Summary Statistics Description
-This gives a distribution of the programming experience of the corresponding to the number of students in each category
+This gives a distribution of the programming experience of the corresponding to the number of students in each category:
 
 ```{r echo = FALSE, message = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -109,13 +109,13 @@ num_students<-nrow(survey_data)
 
 #Inline Variables for Visual 1 Report
 lots_exp_db<- filter(survey_data, Programming.Experience == "I have lots of experience with a programming language (e.g., CSE143+)")
-lots_coffee_mean<- summarize(lots_exp_db, mean = mean(Cups.of.Coffee))
+lots_coffee_mean<- round(summarize(lots_exp_db, mean = mean(Cups.of.Coffee)), 2)
 
 moderate_exp_db<- filter(survey_data, Programming.Experience == "I have moderate experience with a programming language (e.g., CSE1I have lots of experience with a programming language (e.g., CSE143+)2)")
 moderate_coffee_mean<- summarize(moderate_exp_db, mean = mean(Cups.of.Coffee))
 
 simple_exp_db<- filter(survey_data, Programming.Experience == "I've experimented with simple programming")
-simple_coffee_mean<- summarize(simple_exp_db, mean = mean(Cups.of.Coffee))
+simple_coffee_mean<- round(summarize(simple_exp_db, mean = mean(Cups.of.Coffee)), 2)
 
 no_exp_db<- filter(survey_data, Programming.Experience == "I've never written code")
 no_coffee_mean<- summarize(no_exp_db, mean = mean(Cups.of.Coffee))
