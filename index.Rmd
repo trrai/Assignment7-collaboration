@@ -1,0 +1,36 @@
+---
+title: "index.rmd"
+author: "Team Rocket"
+date: "2/20/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("httr")
+library("jsonlite")
+library("knitr")
+library("dplyr")
+```
+
+## Summary Statistics Description
+This gives a distribution of the programming experience of the corresponding to the number of students in each category
+
+```{r echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+class.data <- read.csv(file = "data/intro-survey.csv", stringsAsFactors = FALSE)
+programming.experience <- data.frame(table(class.data$Programming.Experience))
+colnames(programming.experience) <- c("Programming Experience", "Number of People")
+kable(programming.experience)
+```
+
+This gives a similar distribution to the table above, but instead it shows the distribtuion of experience when it comes to command line programming.
+
+```{r echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+commandline.experience <- data.frame(table(class.data$Command.Line.Experience))
+colnames(commandline.experience) <- c("Command-Line Experience", "Number of People")
+kable(commandline.experience)
+```
+
+Here we see that thereis no direct corelations between the distributions of the two types of programming.
