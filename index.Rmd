@@ -19,7 +19,7 @@ library("ggplot2")
 ```{r echo=FALSE, message=FALSE}
 
 # read file 
-data <- read.csv("/Users/eugene/Desktop/info/a7-collaboration-trrai/data/intro-survey.csv", stringsAsFactors = FALSE)
+data <- read.csv("data/intro-survey.csv", stringsAsFactors = FALSE)
 
 # count how people are they 
 count.nrow.data <-nrow(data)
@@ -80,7 +80,7 @@ calculate.no.info <- round((no.count / count.nrow.data) * 100)
 We took a survey of `r count.nrow.data` of people. It was organized by 4 categories which are lots of experiement, moderate experiement, simple experiement and no experiment on programm langauge. `r calculat.info` % poeple has lots of experiment and drink average `r lots.coff` cups of coffee per day. Also `r yes.lots.info` people interested in informatic major, but, `r no.lots.info` people doesn't interested in informatic major even though they have lots of programming experiement. `r calculate.moderate.info` % people has moderate experiement and drink average `r moderate.coff` cups of coffe per day. Also, `r yes.moderate.info` people interested in informatic major, but, `r no.moderate.info` people doesn't interested in informatic major even though they have lots of programming experiement. `r calculate.simple.info` % people has moderate experiement and drink average `r simple.coff` cups of coffe per day. Also, `r yes.simple.info` people interested in informatic major, but, `r no.simple.info`people doesn't interested in informatic major even though they have lots of programming experiement. `r calculate.no.info` % people has moderate experiement and drink average `r no.coff` cups of coffe per day. Also, `r yes.no.info` people interested in informatic major, but, `r no.no.info` people doesn't interested in informatic major even though they have lots of programming experiement."
             
 
-## Summary Statistics Description
+###Summary Statistics Description
 This gives a distribution of the programming experience of the corresponding to the number of students in each category
 
 ```{r echo = FALSE, message = FALSE}
