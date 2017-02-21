@@ -1,8 +1,7 @@
 ---
-title: "Index.Rmd"
-author: "Team Rocket"
-date: "2/19/2017"
-output: html_document
+title: "Info 201 Survey Analysis"
+author: "The Team (AE5)"
+date: "2/20/2017"
 ---
 
 
