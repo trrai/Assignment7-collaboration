@@ -11,6 +11,8 @@ library("httr")
 library("jsonlite")
 library("knitr")
 library("dplyr")
+library("ggplot2")
+
 ```
 
 ## Summary Statistics Description
