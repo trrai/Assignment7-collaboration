@@ -34,3 +34,77 @@ kable(commandline.experience)
 ```
 
 Here we see that thereis no direct corelations between the distributions of the two types of programming.
+
+
+```{r visuals setup, echo=FALSE}
+survey_data<-read.csv("data/intro-survey.csv", stringsAsFactors = FALSE)
+
+num_students<-nrow(survey_data)
+
+#Inline Variables for Visual 1 Report
+lots_exp_db<- filter(survey_data, Programming.Experience == "I have lots of experience with a programming language (e.g., CSE143+)")
+lots_coffee_mean<- summarize(lots_exp_db, mean = mean(Cups.of.Coffee))
+
+moderate_exp_db<- filter(survey_data, Programming.Experience == "I have moderate experience with a programming language (e.g., CSE1I have lots of experience with a programming language (e.g., CSE143+)2)")
+moderate_coffee_mean<- summarize(moderate_exp_db, mean = mean(Cups.of.Coffee))
+
+simple_exp_db<- filter(survey_data, Programming.Experience == "I've experimented with simple programming")
+simple_coffee_mean<- summarize(simple_exp_db, mean = mean(Cups.of.Coffee))
+
+no_exp_db<- filter(survey_data, Programming.Experience == "I've never written code")
+no_coffee_mean<- summarize(no_exp_db, mean = mean(Cups.of.Coffee))
+
+
+#Inline Variables for Visual 2 Report
+markdown_expert_num<- nrow(filter(survey_data, Markdown.Experience == "Expert user"))
+markdown_intermediate_num<- nrow(filter(survey_data, Markdown.Experience == "Intermediate user"))
+markdown_few_num<- nrow(filter(survey_data, Markdown.Experience == "Used it a few times"))
+markdown_never_num<- nrow(filter(survey_data, Markdown.Experience == "Never used it"))
+
+commandline_expert_num<- nrow(filter(survey_data, Command.Line.Experience == "Expert user"))
+commandline_intermediate_num<- nrow(filter(survey_data, Command.Line.Experience == "Intermediate user"))
+commandline_few_num<- nrow(filter(survey_data, Command.Line.Experience == "Used it a few times"))
+commandline_never_num<- nrow(filter(survey_data, Command.Line.Experience == "Never used it"))
+
+versioncontrol_expert_num<- nrow(filter(survey_data, Version.Control.Experience == "Expert user"))
+versioncontrol_intermediate_num<- nrow(filter(survey_data, Version.Control.Experience == "Intermediate user"))
+versioncontrol_few_num<- nrow(filter(survey_data, Version.Control.Experience == "Used it a few times"))
+versioncontrol_never_num<- nrow(filter(survey_data, Version.Control.Experience == "Never used it"))
+
+r_expert_num<- nrow(filter(survey_data, R.Language.Experience == "Expert user"))
+r_intermediate_num<- nrow(filter(survey_data, R.Language.Experience == "Intermediate user"))
+r_few_num<- nrow(filter(survey_data, R.Language.Experience == "Used it a few times"))
+r_never_num<- nrow(filter(survey_data, R.Language.Experience == "Never used it"))
+
+```
+###Relationship between Programming Experience, Coffee Consumption and Operating Systems
+
+By taking a look at some specific parts of the survey results, we can analyze relationships between the inputs. There were `r num_students` recorded entries from students enrolled into the course. In the bar graph below, the level of programming experience is shown in relation to the total cups of coffee drank per day and type of operating system in use. Programming experience is classified in intervals of lots of experience with a programming language, moderate experience with a programming language, experimentation with simple programming, or never previously writing code. The height of each bar is set by the total number of coffee cups drank per day and the colors within the bars represent the operating systems students used. 
+
+Now we can break down the table to highlight some key aspects of the data. Students who answered lots of experience had the second highest _total_ intake of coffee (`r lots_coffee_mean` cups per day) and showed a fairly even split of students using either Windows or Mac OS X. Next, we can see that the highest number of _total_ coffee consumption is with the group of students who claimed to have moderate experience with coding, although holding an average of `r moderate_coffee_mean` cups per day. Also, the moderate coding experience group was the only one with students using the Linux operating system. Simple programming and no previous coding experience both had a high _average_ but low _total_ sum of coffee consumption per day; `r simple_coffee_mean` cups per day for simple programming and `r no_coffee_mean` cup per day for no experience. In addition, most of the students in the course used Mac OS X, with Windows as a close second and Linux falling far behind. Also, we can see that students in the Info 201 course who held a higher level of programming experience also tend to drink more coffee per day than students who had less or no experience. 
+
+```{r First Visual, fig.align = "center", echo=FALSE}
+
+ggplot(data = survey_data) + 
+  geom_bar(mapping = aes(x = Programming.Experience, y = Cups.of.Coffee, fill = Operating.System), stat="identity") + scale_x_discrete(labels=c("Lots", "Moderate", "Simple",  "Never")) + xlab("Programming Experience") + ylab("Total Cups of Coffee Per Day") + ggtitle("Coffee Intake and Operating System Use in relation to Programming Experience") + labs(fill="Operating System")
+
+
+```
+
+Overall, we can see that the large majority of students who enrolled in Info 201 this quarter had some sort of programming experience. As a whole the group preferred Mac OS X and Windows. In addition, students with more experience tended to consume more coffee. 
+
+###Programming Experience Details
+Previously we looked at the level of programming experience and how it's related to coffee intake and operating systems. Now we can further analyze the programming experience Info 201 students had before this course. The visual below represents various types of programming platforms and how they tie together to make up the overall experience of students. The axises of the graph show Command Line experience and Markdown experience while the shapes represent R Language experience and colors represent Version Control experience. The input for each of these platforms was recorded on a scale of expert user, intermediate user, no previous use, or using it a few times; with R language as an exception as no student identified themselves as an expert user.
+
+We can now move on to observing some of the patterns present in the plot below. Starting with the colors of the data points, which represent Version Control Experience, we can clearly see that there is a high amount of blue and purple points. This translates to the majority of students stating they have used Version Control a few times or not at all (`r versioncontrol_few_num` few times users and `r versioncontrol_never_num` users with no experience). There's a small amount of green points and only a few red points, meaning not many students were experienced with Version Control prior to the course; only `r versioncontrol_expert_num` expert users and `r versioncontrol_intermediate_num` intermediate users. Taking a look at the shapes of the points, we can see a similar pattern where most of the students indicated they had little to no experience with R language; `r r_few_num` users with few times use, `r r_never_num` users that had never used it before compared to `r r_expert_num` expert users and `r r_intermediate_num` intermediate users. The distribution itself shows a bit more spread, meaning students had a higher deviation of experience with Command Line and Markdown. There were much more individuals who answered they were an intermediate or expert user with command line. `r commandline_expert_num` students indicated they were experts with command line and `r commandline_intermediate_num` said they were intermediate users. Markdown seemed to follow the trend of Version Control and R: `r markdown_expert_num` students who identified as expert Markdown users and `r markdown_intermediate_num` as intermediate Markdown users. The amount of experienced users in Command Line is much more than the other three platforms.
+
+```{r Second Visual, fig.align = "center", echo=FALSE}
+
+ggplot(data = survey_data) + 
+  geom_jitter(mapping = aes(x = Command.Line.Experience, y = Markdown.Experience, color = Version.Control.Experience, shape = R.Language.Experience)) + theme(axis.text.x = element_text(angle=15, hjust=1), legend.position = "bottom", legend.box = "vertical") + xlab("Command Line Experience") + ylab("Markdown Experience") + guides(color=guide_legend(nrow=2), shape=guide_legend(nrow=2)) + ggtitle("Coding Platform Experience prior to Info 201") + labs(color = "Version Control Experience", shape = "R Language Experience")
+
+
+```
+
+Using this visual is a good tool to understand the details of students' programming experience prior to enrolling in Info 201. We can see that the majority of students had little to no experience with the languages taught in Info 201, with an emphasis on Version Control, R, and Markdown. The trend with Command Line showed some more experience spread across the distribution but there was still a dense area of points near the less experienced intervals. 
+
